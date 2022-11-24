@@ -5,7 +5,7 @@ import {UserProfile} from '@loopback/security';
 import parseBearerToken from 'parse-bearer-token';
 import {AutenticacionService} from '../services';
 
-export class EstrategiaAdministrador implements AuthenticationStrategy {
+export class EstrategiaAsesor implements AuthenticationStrategy {
   name: string = 'asesor';
 
   constructor(
@@ -18,10 +18,13 @@ export class EstrategiaAdministrador implements AuthenticationStrategy {
     if (token) {
       let datos = this.servicioAutenticacion.ValidarTokenJWT(token);
       if(datos){
-        let perfil: UserProfile = Object.assign({
-          nombre: datos.data.nombre
-        });
-        return perfil;
+        if(datos.data.rol == "asesor"){
+          let perfil: UserProfile = Object.assign({
+            nombre: datos.data.nombre
+          });
+          return perfil;
+        }
+
       }else{
         throw new HttpErrors[401]('El token es incorrecto')
       }

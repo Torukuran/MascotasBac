@@ -5,7 +5,7 @@ export declare class AutenticacionService {
     constructor(usuarioRepository: UsuarioRepository);
     GenerarClave(): any;
     CifrarClave(clave: string): any;
-    IdentificarUsuario(usuario: string, clave: string): false | Promise<(Usuario & import("../models").UsuarioRelations) | null>;
+    identificarUsuario(usuario: string, clave: string): false | Promise<(Usuario & import("../models").UsuarioRelations) | null>;
     GenerarTokenJWT(usuario: Usuario): any;
     ValidarTokenJWT(token: string): any;
 }

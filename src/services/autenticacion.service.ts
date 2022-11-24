@@ -30,9 +30,9 @@ export class AutenticacionService {
 
   }
 
-  IdentificarUsuario(usuario: string, clave: string){
+  identificarUsuario(usuario: string, clave: string){
     try{
-      let p= this.usuarioRepository.findOne({where: {correo: usuario, contrasena: clave}})
+      let p= this.usuarioRepository.findOne({where: {correo: usuario, contrasena: clave}});
       if(p){
         return p;
       }
@@ -47,7 +47,8 @@ export class AutenticacionService {
       data: {
         id: usuario.id,
         correo: usuario.correo,
-        nombre: usuario.nombre
+        nombre: usuario.nombre,
+        rol: usuario.rol
       }
     },
       Llaves.claveJWT)

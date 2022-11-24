@@ -8,9 +8,10 @@ export declare class UsuarioController {
     constructor(usuarioRepository: UsuarioRepository, servicioAutenticacion: AutenticacionService);
     identificarUsuario(credenciales: Credenciales): Promise<{
         datos: {
+            id: string | undefined;
             nombre: string;
             correo: string;
-            id: string | undefined;
+            rol: string;
         };
         tk: any;
     }>;

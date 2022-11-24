@@ -24,7 +24,7 @@ let AutenticacionService = class AutenticacionService {
         let claveCifrada = cryptoJS.MD5(clave);
         return claveCifrada;
     }
-    IdentificarUsuario(usuario, clave) {
+    identificarUsuario(usuario, clave) {
         try {
             let p = this.usuarioRepository.findOne({ where: { correo: usuario, contrasena: clave } });
             if (p) {
@@ -41,7 +41,8 @@ let AutenticacionService = class AutenticacionService {
             data: {
                 id: usuario.id,
                 correo: usuario.correo,
-                nombre: usuario.nombre
+                nombre: usuario.nombre,
+                rol: usuario.rol
             }
         }, llaves_1.Llaves.claveJWT);
         return token;

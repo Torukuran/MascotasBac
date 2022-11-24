@@ -15,14 +15,15 @@ let UsuarioController = class UsuarioController {
         this.servicioAutenticacion = servicioAutenticacion;
     }
     async identificarUsuario(credenciales) {
-        let p = await this.servicioAutenticacion.IdentificarUsuario(credenciales.usuario, credenciales.contrasena);
+        let p = await this.servicioAutenticacion.identificarUsuario(credenciales.usuario, credenciales.contrasena);
         if (p) {
             let token = this.servicioAutenticacion.GenerarTokenJWT(p);
             return {
                 datos: {
+                    id: p.id,
                     nombre: p.nombre,
                     correo: p.correo,
-                    id: p.id
+                    rol: p.rol
                 },
                 tk: token
             };
@@ -69,7 +70,7 @@ let UsuarioController = class UsuarioController {
     }
 };
 tslib_1.__decorate([
-    (0, rest_1.post)('/IdentificarUsuario', {
+    (0, rest_1.post)('/identificarUsuario', {
         responses: {
             '200': {
                 description: 'Identificación de usuario'

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductoServicioController = void 0;
 const tslib_1 = require("tslib");
+const authentication_1 = require("@loopback/authentication");
 const repository_1 = require("@loopback/repository");
 const rest_1 = require("@loopback/rest");
 const models_1 = require("../models");
@@ -103,6 +104,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], ProductoServicioController.prototype, "updateAll", null);
 tslib_1.__decorate([
+    authentication_1.authenticate.skip(),
     (0, rest_1.get)('/producto-servicios/{id}'),
     (0, rest_1.response)(200, {
         description: 'ProductoServicio model instance',

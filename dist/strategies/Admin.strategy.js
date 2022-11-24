@@ -16,17 +16,19 @@ let EstrategiaAdministrador = class EstrategiaAdministrador {
         if (token) {
             let datos = this.servicioAutenticacion.ValidarTokenJWT(token);
             if (datos) {
-                let perfil = Object.assign({
-                    nombre: datos.data.nombre
-                });
-                return perfil;
+                if (datos.data.rol == "admin") {
+                    let perfil = Object.assign({
+                        nombre: datos.data.nombre
+                    });
+                    return perfil;
+                }
+                else {
+                    throw new rest_1.HttpErrors[401]('El token es incorrecto');
+                }
             }
             else {
-                throw new rest_1.HttpErrors[401]('El token es incorrecto');
+                throw new rest_1.HttpErrors[401]('No se encuentra incluido el token');
             }
-        }
-        else {
-            throw new rest_1.HttpErrors[401]('No se encuentra incluido el token');
         }
     }
 };

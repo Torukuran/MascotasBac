@@ -25,7 +25,7 @@ export class UsuarioController {
     public servicioAutenticacion: AutenticacionService
   ) { }
 
-  @post('/IdentificarUsuario', {
+  @post('/identificarUsuario', {
     responses: {
       '200': {
         description: 'Identificación de usuario'
@@ -35,14 +35,15 @@ export class UsuarioController {
   async identificarUsuario(
     @requestBody() credenciales: Credenciales
   ) {
-    let p = await this.servicioAutenticacion.IdentificarUsuario(credenciales.usuario, credenciales.contrasena);
+    let p = await this.servicioAutenticacion.identificarUsuario(credenciales.usuario, credenciales.contrasena);
     if (p) {
       let token = this.servicioAutenticacion.GenerarTokenJWT(p);
       return {
         datos: {
+          id: p.id,
           nombre: p.nombre,
           correo: p.correo,
-          id: p.id
+          rol: p.rol
         },
         tk: token
       }
